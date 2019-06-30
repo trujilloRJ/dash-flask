@@ -1,0 +1,53 @@
+<html>
+	<link rel="stylesheet" media="screen" href = "{{ url_for('static', filename='css/bootstrap.min.css') }}">
+	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+    <head>
+      {% if title %}
+      <title>{{ title }} - Microblog</title>
+      {% else %}
+      <title>Welcome to Microblog</title>
+      {% endif %}
+    </head>
+    <body>
+		<div class='container-fluid'>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<a class="navbar-brand" href="{{ url_for('main.index') }}">
+					<img src="/static/images/report.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+					Dash-Flask
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="nav navbar-nav ml-auto">
+						{% if current_user.is_anonymous %}
+						<li class='nav-item'><a class="nav-link" href="{{ url_for('auth.login') }}">
+							Login
+						</a></li>
+						{% else %}
+						<li class='nav-item'><a class="nav-link" href="{{ url_for('auth.logout') }}">
+							Logout
+						</a></li>
+						{% endif %}
+						<li class='nav-item'><a class="nav-link" href="/dash">
+							Dash
+						</a></li>
+					</ul>
+				</div>
+				<hr>
+			</nav>
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			<ul>
+				{% for message in messages %}
+				<li>{{ message }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			{% endwith %}
+		</div>	
+		<div class='container'>
+			{% block content %}{% endblock %}
+		</div>
+    </body>
+</html>
