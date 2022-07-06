@@ -28,7 +28,7 @@ jsmin==2.2.2
 jsonschema==3.0.1
 jupyter-core==4.4.0
 lesscpy==0.13.0
-lxml==4.3.2
+lxml==4.9.1
 Mako==1.0.8
 MarkupSafe==1.1.1
 nbformat==4.4.0
